@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <!-- Add a login button/link -->
+    <button onclick="initiateLogin()">Login with Amazon</button>
+    <script src="https://assets.loginwithamazon.com/sdk/na/login1.js"></script>
+    <script>
+        function initiateLogin() {
+            // Initialize Amazon SDK
+            amazon.Login.setClientId('amzn1.application-oa2-client.9f575f87f43c43c3a981db0c80f50229');
+            amazon.Login.setUseCookie(true);
+
+            // Specify the callback URL
+            const redirectUri = 'localhost:8023/travelPage.html'; // Update with your actual callback URL
+
+            // Redirect user to Amazon login page
+            amazon.Login.authorize({ scope: 'profile', response_type: 'code', redirect_uri: redirectUri });
+        }
+    </script>
+</body>
+</html>
+

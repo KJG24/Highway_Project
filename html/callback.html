@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon OAuth2 Callback</title>
+</head>
+<body>
+    <h1>Amazon OAuth2 Callback</h1>
+    <script src="https://assets.loginwithamazon.com/sdk/na/login1.js"></script>
+    <script>
+        // Extract the authorization code from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        // Initialize Amazon SDK
+        amazon.Login.setClientId('amzn1.application-oa2-client.9f575f87f43c43c3a981db0c80f50229');
+        amazon.Login.setUseCookie(true);
+
+        // Exchange the code for an access token
+        amazon.Login.authorize({ scope: 'profile' }, (response) => {
+            if (response.error) {
+                console.error('Error exchanging code for access token:', response.error);
+                // Handle error as needed
+            } else {
+                const accessToken = response.access_token;
+                // Store the access token securely (e.g., in localStorage)
+                localStorage.setItem('accessToken', accessToken);
+                // Redirect or perform further actions
+                window.location.href = 'file:///Users/wyatt/Documents/GitHub/Highway_Project/html/travelPage.html'; // Redirect to home page or another desired URL
+            }
+        });
+    </script>
+</body>
+</html>
+
